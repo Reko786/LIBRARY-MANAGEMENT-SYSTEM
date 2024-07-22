@@ -21,42 +21,42 @@ class Library:
             return
 
         if title not in self.books:
-            print("Book not found. Please check the title and try again.")
-        elif self.books[title] == 'borrowed':
-            print("Book is currently borrowed. Please try another book.")
+            print("Book Not Found!! Please Check The Title And Try Again.")
+        elif self.books[title] == 'Borrowed':
+            print("Book Is Currently Borrowed. Please Try Another Book.")
         else:
-            self.books[title] = 'borrowed'
-            print(f"You have borrowed '{title}'.")
+            self.books[title] = 'Borrowed'
+            print(f"You Have Borrowed '{title}'.")
 
     def remove_book(self):
-        title = input("Enter book title to remove: ").strip()
+        title = input("Enter Book Name To Remove: ").strip()
         if not title:
-            print("Book title cannot be empty. Please try again.")
+            print("Invalid Option!! Please Try Again.")
             return
 
         if title in self.books:
             del self.books[title]
-            print(f"Book '{title}' removed from the library.")
+            print(f"Book '{title}' Removed From The Library.")
         else:
-            print("Book not found. Please check the title and try again.")
+            print("Book Not Found!! Please Check The Book Name And Try Again.")
 
     def search_book(self):
-        title = input("Enter book title to search: ").strip()
+        title = input("Enter Book Name To Search: ").strip()
         if not title:
-            print("Book title cannot be empty. Please try again.")
+            print("Invalid Option!! Please Try Again.")
             return
 
         if title in self.books:
             status = self.books[title]
             print(f"Book '{title}' is {status}.")
         else:
-            print("Book not found. Please check the title and try again.")
+            print("Book Not Found. Please Check The Book Name And Try Again.")
 
     def list_books(self):
         if not self.books:
-            print("No books in the library.")
+            print("No Books In The Library.")
         else:
-            print("Listing all books in the library:")
+            print("Listing All Books In The Library:")
             for title, status in self.books.items():
                 print(f"Title: {title}, Status: {status}")
 
@@ -83,7 +83,7 @@ def main():
         elif choice == '5':
             library.list_books()
         elif choice == '6':
-            print("Exiting the Library Management System.")
+            print("Exiting the Library Management System. Thanks For Visiting!!")
             break
         else:
             print("Invalid choice. Please enter a number between 1 and 6.")
