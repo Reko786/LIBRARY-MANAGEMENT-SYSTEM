@@ -1,4 +1,4 @@
-class Book:
+lass Book:
     def __init__(self, title, author, isbn):
         self.title = title
         self.author = author
@@ -14,11 +14,13 @@ class Library:
     def __init__(self):
         self.books = []
 
+### This Function Is For Adding Books##
     def add_book(self, title, author, isbn):
         new_book = Book(title, author, isbn)
         self.books.append(new_book)
         print(f"Book '{title}' added to the library.")
 
+## This Function Is To Borrow A Book##
     def borrow_book(self, isbn):
         book = self.find_book(isbn)
         if book and not book.is_borrowed:
@@ -29,6 +31,8 @@ class Library:
         else:
             print(f"Book '{book.title}' is already borrowed.")
 
+## This Function Is To Remove Book ##
+
     def remove_book(self, isbn):
         book = self.find_book(isbn)
         if book:
@@ -36,6 +40,8 @@ class Library:
             print(f"Book '{book.title}' removed from the library.")
         else:
             print(f"Book with ISBN {isbn} not found.")
+
+## This Function Is To Search Book ##
 
     def search_book(self, title):
         found_books = [book for book in self.books if title.lower() in book.title.lower()]
@@ -45,6 +51,8 @@ class Library:
                 print(book)
         else:
             print(f"No books found with title containing '{title}'.")
+
+## This Function Is To List All The Books ##
 
     def list_all_books(self):
         if self.books:
@@ -61,6 +69,7 @@ class Library:
         return None
 
 
+## Below Is The Menu System To Choose Options ##
 def main():
     library = Library()
 
@@ -98,8 +107,11 @@ def main():
             print("Invalid choice. Please try again.")
 
 
+
+
 if __name__ == "__main__":
     main()
+
 
 
 
