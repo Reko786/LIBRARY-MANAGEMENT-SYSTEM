@@ -2,17 +2,35 @@ class Library:
     def __init__(self):
         self.books = {}
 
-    def add_book(self):
-        title = input("Enter Name Of Book To Add: ").strip()
-        if not title:
-            print("Invalid Option!! Please Try Again.")
-            return
+        def add_book(self):
+            while True:
+                title = input("Enter Name Of Book To Add: ").strip()
 
-        if title in self.books:
-            print("Book Already Exists. Please Add A Different Book.")
-        else:
-            self.books[title] = 'available'
-            print(f"Book '{title}' Added To The Library.")
+                if not title:
+                    print("Invalid Option!! The Book Title Cannot Be Empty. Please Try Again.")
+                    continue
+
+                if len(title) > 100:
+                    print("Invalid Option!! The Book Title Is Too Long. Please Keep It Under 100 Characters.")
+                    continue
+
+                if any(char.isdigit() for char in title):
+                    print("Invalid Option!! The Book Title Should Not Contain Numbers. Please Try Again.")
+                    continue
+
+                if title in self.books:
+                    print("Book Already Exists. Please Add A Different book.")
+                    return
+
+                self.books[title] = 'available'
+                print(f"Book '{title}' Added To The Library.")
+                break
+
+            if title in self.books:
+                print("Book Already Exists. Please Add A Different book.")
+            else:
+                self.books[title] = 'available'
+                print(f"Book '{title}' Added To The Library.")
 
     def borrow_book(self):
         title = input("Enter Name Of Book To Borrow: ").strip()
