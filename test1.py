@@ -2,6 +2,7 @@ class Library:
     def __init__(self):
         self.books = {}
 
+ ##### Below Is The Function To Add A Book #####      
         def add_book(self):
             while True:
                 title = input("Enter Name Of Book To Add: ").strip()
@@ -26,7 +27,8 @@ class Library:
                 print(f"Book '{title}' Added To The Library.")
                 break
 
-
+ ##### Below Is The Function To Borrow A Book ##### 
+    
     def borrow_book(self):
         title = input("Enter Name Of Book To Borrow: ").strip()
         if not title:
@@ -41,6 +43,8 @@ class Library:
             self.books[title] = 'Borrowed'
             print(f"You Have Borrowed '{title}'.")
 
+     ##### Below Is The Function To Remove A Book ##### 
+
     def remove_book(self):
         title = input("Enter Book Name To Remove: ").strip()
         if not title:
@@ -53,6 +57,8 @@ class Library:
         else:
             print("Book Not Found!! Please Check The Book Name And Try Again.")
 
+ ##### Below Is The Function To Search A Book ##### 
+    
     def search_book(self):
         title = input("Enter Book Name To Search: ").strip()
         if not title:
@@ -65,6 +71,8 @@ class Library:
         else:
             print("Book Not Found. Please Check The Book Name And Try Again.")
 
+     ##### Below Is The Function To List All Books ##### 
+
     def list_books(self):
         if not self.books:
             print("No Books In The Library.")
@@ -72,6 +80,9 @@ class Library:
             print("Listing All Books In The Library:")
             for title, status in self.books.items():
                 print(f"Title: {title}, Status: {status}")
+
+
+ ##### Below Is The Main Menu ##### 
 
 def main():
     library = Library()
