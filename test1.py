@@ -3,13 +3,13 @@ class Library:
         self.books = {}
 
     def add_book(self):
-        title = input("Enter book title to add: ").strip()
+        title = input("Enter Name Of Book To Add: ").strip()
         if not title:
-            print("Book title cannot be empty. Please try again.")
+            print("Invalid Option!! Please Try Again.")
             return
 
         if title in self.books:
-            print("Book already exists. Please add a different book.")
+            print("Book Already Exists. Please Add A Different Book.")
         else:
             self.books[title] = 'available'
             print(f"Book '{title}' added to the library.")
