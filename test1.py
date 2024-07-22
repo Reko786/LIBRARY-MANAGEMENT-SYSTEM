@@ -12,12 +12,12 @@ class Library:
             print("Book Already Exists. Please Add A Different Book.")
         else:
             self.books[title] = 'available'
-            print(f"Book '{title}' added to the library.")
+            print(f"Book '{title}' Added To The Library.")
 
     def borrow_book(self):
-        title = input("Enter book title to borrow: ").strip()
+        title = input("Enter Name Of Book To Borrow: ").strip()
         if not title:
-            print("Book title cannot be empty. Please try again.")
+            print("Invalid Option!!. Please try again.")
             return
 
         if title not in self.books:
