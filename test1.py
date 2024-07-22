@@ -1,78 +1,67 @@
-class Book:
-    def __init__(self, title, author, isbn):
-        self.title = title
-        self.author = author
-        self.isbn = isbn
-        self.is_borrowed = False
-
-    def __str__(self):
-        status = "Borrowed" if self.is_borrowed else "Available"
-        return f"{self.title} by {self.author} (ISBN: {self.isbn}) - {status}"
-
-
 class Library:
     def __init__(self):
-        self.books = []
+        self.books = {}
 
-### This Function Is For Adding Books##
-    def add_book(self, title, author, isbn):
-        new_book = Book(title, author, isbn)
-        self.books.append(new_book)
-        print(f"Book '{title}' added to the library.")
+    def add_book(self):
+        title = input("Enter book title to add: ").strip()
+        if not title:
+            print("Book title cannot be empty. Please try again.")
+            return
 
-## This Function Is To Borrow A Book##
-    def borrow_book(self, isbn):
-        book = self.find_book(isbn)
-        if book and not book.is_borrowed:
-            book.is_borrowed = True
-            print(f"Book '{book.title}' borrowed successfully.")
-        elif not book:
-            print(f"Book with ISBN {isbn} not found.")
+        if title in self.books:
+            print("Book already exists. Please add a different book.")
         else:
-            print(f"Book '{book.title}' is already borrowed.")
+            self.books[title] = 'available'
+            print(f"Book '{title}' added to the library.")
 
-## This Function Is To Remove Book ##
+    def borrow_book(self):
+        title = input("Enter book title to borrow: ").strip()
+        if not title:
+            print("Book title cannot be empty. Please try again.")
+            return
 
-    def remove_book(self, isbn):
-        book = self.find_book(isbn)
-        if book:
-            self.books.remove(book)
-            print(f"Book '{book.title}' removed from the library.")
+        if title not in self.books:
+            print("Book not found. Please check the title and try again.")
+        elif self.books[title] == 'borrowed':
+            print("Book is currently borrowed. Please try another book.")
         else:
-            print(f"Book with ISBN {isbn} not found.")
+            self.books[title] = 'borrowed'
+            print(f"You have borrowed '{title}'.")
 
-## This Function Is To Search Book ##
+    def remove_book(self):
+        title = input("Enter book title to remove: ").strip()
+        if not title:
+            print("Book title cannot be empty. Please try again.")
+            return
 
-    def search_book(self, title):
-        found_books = [book for book in self.books if title.lower() in book.title.lower()]
-        if found_books:
-            print(f"Books matching '{title}':")
-            for book in found_books:
-                print(book)
+        if title in self.books:
+            del self.books[title]
+            print(f"Book '{title}' removed from the library.")
         else:
-            print(f"No books found with title containing '{title}'.")
+            print("Book not found. Please check the title and try again.")
 
-## This Function Is To List All The Books ##
+    def search_book(self):
+        title = input("Enter book title to search: ").strip()
+        if not title:
+            print("Book title cannot be empty. Please try again.")
+            return
 
-    def list_all_books(self):
-        if self.books:
+        if title in self.books:
+            status = self.books[title]
+            print(f"Book '{title}' is {status}.")
+        else:
+            print("Book not found. Please check the title and try again.")
+
+    def list_books(self):
+        if not self.books:
+            print("No books in the library.")
+        else:
             print("Listing all books in the library:")
-            for book in self.books:
-                print(book)
-        else:
-            print("No books available in the library.")
+            for title, status in self.books.items():
+                print(f"Title: {title}, Status: {status}")
 
-    def find_book(self, isbn):
-        for book in self.books:
-            if book.isbn == isbn:
-                return book
-        return None
-
-
-## Below Is The Menu System To Choose Options ##
 def main():
     library = Library()
-
     while True:
         print("\nLibrary Management System")
         print("1. Add Book")
@@ -81,36 +70,27 @@ def main():
         print("4. Search Book")
         print("5. List All Books")
         print("6. Exit")
-
-        choice = input("Enter your choice: ")
+        choice = input("Enter your choice (1-6): ").strip()
 
         if choice == '1':
-            title = input("Enter book title: ")
-            author = input("Enter book author: ")
-            isbn = input("Enter book ISBN: ")
-            library.add_book(title, author, isbn)
+            library.add_book()
         elif choice == '2':
-            isbn = input("Enter book ISBN to borrow: ")
-            library.borrow_book(isbn)
+            library.borrow_book()
         elif choice == '3':
-            isbn = input("Enter book ISBN to remove: ")
-            library.remove_book(isbn)
+            library.remove_book()
         elif choice == '4':
-            title = input("Enter book title to search: ")
-            library.search_book(title)
+            library.search_book()
         elif choice == '5':
-            library.list_all_books()
+            library.list_books()
         elif choice == '6':
-            print("Exiting the library management system.")
+            print("Exiting the Library Management System.")
             break
         else:
-            print("Invalid choice. Please try again.")
-
-
-
+            print("Invalid choice. Please enter a number between 1 and 6.")
 
 if __name__ == "__main__":
     main()
+
 
 
 
